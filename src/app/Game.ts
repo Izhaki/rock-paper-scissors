@@ -40,9 +40,28 @@ class Game {
     }
 
     private concludeMatch( aMatch: Match ): void {
+        const [ aPlayer0Choice, aPlayer1Choice ] = aMatch;
+        const iWinner = this.getWinner( aPlayer0Choice, aPlayer1Choice );
         this.event$.notify({
-            winner: DRAW
+            winner: iWinner
         });
+    }
+
+    // Note: The parameters are intentionally the choice of two players rather
+    // than a Match, so we can later use this method if there are more than 2
+    // players (eg, with Array.reduce()).
+    // Also, you could implement this using nested ifs, but I've found the
+    // matrix solution more declaritive.
+    private getWinner( aPlayer0Choice: PlayerChoice, aPlayer1Choice: PlayerChoice ): number {
+        const ROW = 0; // Row represents aPlayer0Choice
+        const COL = 1; // Col represents aPlayer1Choice
+        const iWinnerMatrix = [
+            /*               [ ROCK, PAPER, SCISSORS ] */
+            /*  ROCK:     */ [ DRAW,   COL,      ROW ],
+            /*  PAPER:    */ [  ROW,  DRAW,      COL ],
+            /*  SCISSORS: */ [  COL,   ROW,     DRAW ]
+        ];
+        return iWinnerMatrix[ aPlayer0Choice ][ aPlayer1Choice ];
     }
 
     private allPlayersMadeTheirChoice( aMatch: Match ): boolean {
