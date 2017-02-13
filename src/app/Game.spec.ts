@@ -72,13 +72,27 @@ describe( 'Game', () => {
 
         });
 
-        it( 'should notify when a game concludes', () => {
-            this.game.setPlayerChoice( 0, ROCK );
-            this.game.setPlayerChoice( 1, ROCK );
+        describe( 'should notify when a match concludes', () => {
 
-            expect( this.events.length ).toEqual( 1 );
-            expect( this.events[0].type ).toBe( EVENT_MATCH_CONCLUDED );
-            expect( this.events[0].winner ).toBe( DRAW );
+            beforeEach( () => {
+                this.game.setPlayerChoice( 0, PAPER );
+                this.game.setPlayerChoice( 1, ROCK );
+            });
+
+            it( 'signifying a match conclusion', () => {
+                expect( this.events.length ).toEqual( 1 );
+                expect( this.events[0].type ).toBe( EVENT_MATCH_CONCLUDED );
+            });
+
+            it( 'reporting the winner', () => {
+                expect( this.events[0].winner ).toBe( 0 );
+            });
+
+            it( 'reporting the score', () => {
+                expect( this.events[0].players[0].score).toBe( 1 );
+                expect( this.events[0].players[1].score).toBe( 0 );
+            });
+
         });
 
         describe( 'A match should conclude with', () => {

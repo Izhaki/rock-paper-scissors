@@ -26,6 +26,7 @@ type Match = [ PlayerChoice, PlayerChoice ];
 
 interface Player {
     name:       string;
+    score:      number;
     onAutoMode: Boolean;
 }
 
@@ -44,6 +45,7 @@ class Game {
 
         const iPlayerIndex = this.players.push({
             name:       aPlayerName,
+            score:      0,
             onAutoMode: false
         });
 
@@ -98,10 +100,20 @@ class Game {
     private concludeMatch( aMatch: Match ): void {
         const [ aPlayer0Choice, aPlayer1Choice ] = aMatch;
         const iWinner = this.getWinner( aPlayer0Choice, aPlayer1Choice );
+
+        this.updateScores( iWinner );
+
         this.event$.notify({
-            type:   EVENT_MATCH_CONCLUDED,
-            winner: iWinner
+            type:    EVENT_MATCH_CONCLUDED,
+            winner:  iWinner,
+            players: this.players
         });
+    }
+
+    private updateScores( aWinnerIndex: number ): void {
+        if ( aWinnerIndex !== DRAW ) {
+            this.players[ aWinnerIndex ].score++;
+        }
     }
 
     // Note: The parameters are intentionally the choice of two players rather
