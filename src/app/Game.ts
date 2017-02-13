@@ -3,6 +3,8 @@ import {
     Subscription
 } from './Stream';
 
+import { generateRandomIntInclusive } from './utils';
+
 export
 enum PlayerChoice {
     ROCK     = 0,
@@ -29,6 +31,10 @@ class Game {
     private players: Array< Player > = [];
     private matches: Array< Match >  = [];
     private event$: Stream = new Stream();
+
+    static generateRandomChoice(): PlayerChoice {
+        return generateRandomIntInclusive( 0, 2 );
+    }
 
     addPlayer( aPlayerName: string ): number {
         return this.players.push({
@@ -69,7 +75,8 @@ class Game {
     private castAutoChoices( aMatch: Match ): void {
         this.players.forEach( ( aPlayer, aPlayerIndex ) => {
             if ( aPlayer.onAutoMode ) {
-                this.getCurrentMatch()[ aPlayerIndex ] = ROCK;
+                const iRandomChoice = Game.generateRandomChoice();
+                this.getCurrentMatch()[ aPlayerIndex ] = iRandomChoice;
             }
         });
     }

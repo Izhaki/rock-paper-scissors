@@ -19,6 +19,38 @@ describe( 'Game', () => {
         });
     });
 
+    describe( 'generateRandomChoice()', () => {
+
+        beforeEach( () => {
+            this.randomStub = spyOn( Math, 'random' ).and;
+        });
+
+        it( 'should return ROCK if the random number is in the lower third', () => {
+            this.randomStub.returnValue( 0 );
+            expect( Game.generateRandomChoice() ).toBe ( ROCK );
+
+            this.randomStub.returnValue( 0.333 );
+            expect( Game.generateRandomChoice() ).toBe ( ROCK );
+        });
+
+        it( 'should return PAPER if the random number is in the middle third', () => {
+            this.randomStub.returnValue( 0.34 );
+            expect( Game.generateRandomChoice() ).toBe ( PAPER );
+
+            this.randomStub.returnValue( 0.66 );
+            expect( Game.generateRandomChoice() ).toBe ( PAPER );
+        });
+
+        it( 'should return SCISSORS if the random number is in the upper third', () => {
+            this.randomStub.returnValue( 0.67 );
+            expect( Game.generateRandomChoice() ).toBe ( SCISSORS );
+
+            this.randomStub.returnValue( 0.99 );
+            expect( Game.generateRandomChoice() ).toBe ( SCISSORS );
+        });
+
+    });
+
     describe( 'A match should conclude with', () => {
 
         describe( 'a draw if the choice of both players chose', () => {
@@ -122,6 +154,8 @@ describe( 'Game', () => {
     });
 
     it( 'may involve a player in auto mode', () => {
+        spyOn( Math, 'random').and.returnValue( 0 );
+
         this.game.setPlayerAutoMode( 1, true );
         this.game.setPlayerChoice( 0, ROCK );
 
