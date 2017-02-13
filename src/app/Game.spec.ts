@@ -11,6 +11,17 @@ import {
 
 describe( 'Game', () => {
 
+    beforeEach( () => {
+        this.game = new Game();
+        this.events = [];
+        this.subscribeToGameEvents = () => {
+            this.game.subscribe( aEvent => {
+                this.events.push( aEvent );
+            });
+        };
+    });
+
+
     describe( 'generateRandomChoice()', () => {
 
         beforeEach( () => {
@@ -44,11 +55,7 @@ describe( 'Game', () => {
     });
 
     it( 'should notify once all players have joined', () => {
-            this.game = new Game();
-            this.events = [];
-            this.game.subscribe( aEvent => {
-                this.events.push( aEvent );
-            });
+            this.subscribeToGameEvents();
 
             this.game.addPlayer( 'Johnny' );
             this.game.addPlayer( 'Depp' );
@@ -60,15 +67,10 @@ describe( 'Game', () => {
     });
 
     it( 'should notify when a new match starts', () => {
-            this.game = new Game();
-
             this.game.addPlayer( 'Johnny' );
             this.game.addPlayer( 'Depp' );
 
-            this.events = [];
-            this.game.subscribe( aEvent => {
-                this.events.push( aEvent );
-            });
+            this.subscribeToGameEvents();
 
             this.game.startNewMatch();
 
@@ -80,15 +82,10 @@ describe( 'Game', () => {
     describe( 'once all players joined', () => {
 
         beforeEach( () => {
-            this.game = new Game();
             this.game.addPlayer( 'Johnny' );
             this.game.addPlayer( 'Depp' );
             this.game.startNewMatch();
-            this.events = [];
-            this.game.subscribe( aEvent => {
-                this.events.push( aEvent );
-            });
-
+            this.subscribeToGameEvents();
         });
 
         describe( 'should notify when a match concludes', () => {
