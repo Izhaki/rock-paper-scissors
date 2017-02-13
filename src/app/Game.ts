@@ -19,10 +19,27 @@ export const DRAW = -1; // The returned value for a match in case there it's a d
 
 type Match = [ PlayerChoice, PlayerChoice ];
 
+interface Player {
+    name:       string;
+    onAutoMode: Boolean;
+}
+
 export
 class Game {
-    private matches: Array< Match > = [];
+    private players: Array< Player > = [];
+    private matches: Array< Match >  = [];
     private event$: Stream = new Stream();
+
+    addPlayer( aPlayerName: string ): number {
+        return this.players.push({
+            name:       aPlayerName,
+            onAutoMode: false
+        });
+    }
+
+    setPlayerAutoMode( aPlayerIndex: number, onAutoMode: boolean ): void {
+        this.players[ aPlayerIndex ].onAutoMode = onAutoMode;
+    }
 
     startNewMatch(): void {
         this.matches.push( [ undefined, undefined ] );
@@ -43,9 +60,18 @@ class Game {
     }
 
     private checkMatchEnd( aMatch: Match ): void {
-        if ( this.allPlayersMadeTheirChoice( aMatch ) ) {
+        if ( this.allManualChoicesMade( aMatch ) ) {
+            this.castAutoChoices( aMatch );
             this.concludeMatch( aMatch );
         }
+    }
+
+    private castAutoChoices( aMatch: Match ): void {
+        this.players.forEach( ( aPlayer, aPlayerIndex ) => {
+            if ( aPlayer.onAutoMode ) {
+                this.getCurrentMatch()[ aPlayerIndex ] = ROCK;
+            }
+        });
     }
 
     private concludeMatch( aMatch: Match ): void {
@@ -73,9 +99,18 @@ class Game {
         return iWinnerMatrix[ aPlayer0Choice ][ aPlayer1Choice ];
     }
 
-    private allPlayersMadeTheirChoice( aMatch: Match ): boolean {
-        const iNoChoiceMadeCount = ( aMatch.filter( aChoice => aChoice === undefined ) ).length;
-        return iNoChoiceMadeCount === 0;
+    private getManualPlayersCount(): number {
+        return ( this.players.filter( aPlayer => !aPlayer.onAutoMode ) ).length;
+    }
+
+    private allManualChoicesMade( aMatch: Match ): boolean {
+        let iManualChoiceMade = 0;
+        this.players.forEach( ( aPlayer, aPlayerIndex ) => {
+            if ( !aPlayer.onAutoMode && aMatch[ aPlayerIndex ] !== undefined ) {
+                iManualChoiceMade++;
+            }
+        });
+        return iManualChoiceMade === this.getManualPlayersCount();
     }
 
 }

@@ -10,6 +10,8 @@ describe( 'Game', () => {
 
     beforeEach( () => {
         this.game = new Game();
+        this.game.addPlayer( 'Johnny' );
+        this.game.addPlayer( 'Depp' );
         this.game.startNewMatch();
         this.events = [];
         this.game.subscribe( aEvent => {
@@ -119,5 +121,12 @@ describe( 'Game', () => {
         expect( this.events[1].winner ).toBe( 1 );
     });
 
+    it( 'may involve a player in auto mode', () => {
+        this.game.setPlayerAutoMode( 1, true );
+        this.game.setPlayerChoice( 0, ROCK );
+
+        expect( this.events.length ).toEqual( 1 );
+        expect( this.events[0].winner ).toBe( DRAW );
+    });
 
 });
