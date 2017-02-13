@@ -5,7 +5,8 @@ import {
     DRAW,
     SCISSORS,
     EVENT_ALL_PLAYERS_JOINED,
-    EVENT_MATCH_CONCLUDED
+    EVENT_MATCH_CONCLUDED,
+    EVENT_MATCH_STARTED
 } from './Game';
 
 describe( 'Game', () => {
@@ -57,6 +58,24 @@ describe( 'Game', () => {
             expect( this.events[0].players[0].name ).toBe( 'Johnny' );
             expect( this.events[0].players[1].name ).toBe( 'Depp' );
     });
+
+    it( 'should notify when a new match starts', () => {
+            this.game = new Game();
+
+            this.game.addPlayer( 'Johnny' );
+            this.game.addPlayer( 'Depp' );
+
+            this.events = [];
+            this.game.subscribe( aEvent => {
+                this.events.push( aEvent );
+            });
+
+            this.game.startNewMatch();
+
+            expect( this.events.length ).toEqual( 1 );
+            expect( this.events[0].type ).toBe( EVENT_MATCH_STARTED );
+    });
+
 
     describe( 'once all players joined', () => {
 
@@ -183,9 +202,10 @@ describe( 'Game', () => {
             this.game.setPlayerChoice( 0, ROCK );
             this.game.setPlayerChoice( 1, PAPER );
 
-            expect( this.events.length ).toEqual( 2 );
+            expect( this.events.length ).toEqual( 3 );
             expect( this.events[0].winner ).toBe( DRAW );
-            expect( this.events[1].winner ).toBe( 1 );
+            expect( this.events[1].type ).toBe( EVENT_MATCH_STARTED );
+            expect( this.events[2].winner ).toBe( 1 );
         });
 
         it( 'may involve a player in auto mode', () => {

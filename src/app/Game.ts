@@ -21,6 +21,7 @@ export const DRAW = -1; // The returned value for a match in case there it's a d
 
 export const EVENT_ALL_PLAYERS_JOINED = 'All players joined';
 export const EVENT_MATCH_CONCLUDED    = 'Match concluded';
+export const EVENT_MATCH_STARTED      = 'Match started';
 
 type Match = [ PlayerChoice, PlayerChoice ];
 
@@ -65,6 +66,9 @@ class Game {
 
     startNewMatch(): void {
         this.matches.push( [ undefined, undefined ] );
+        this.event$.notify({
+            type: EVENT_MATCH_STARTED
+        });
     }
 
     setPlayerChoice( aPlayerIndex: number, aChoice: PlayerChoice ): void {
