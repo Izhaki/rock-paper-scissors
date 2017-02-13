@@ -8,15 +8,16 @@ import {
 
 describe( 'Game', () => {
 
-    describe( 'A match should conclude with', () => {
-
-        beforeEach( () => {
-            this.game   = new Game();
-            this.events = [];
-            this.game.subscribe( aEvent => {
-                this.events.push( aEvent );
-            });
+    beforeEach( () => {
+        this.game = new Game();
+        this.game.startNewMatch();
+        this.events = [];
+        this.game.subscribe( aEvent => {
+            this.events.push( aEvent );
         });
+    });
+
+    describe( 'A match should conclude with', () => {
 
         describe( 'a draw if the choice of both players chose', () => {
 
@@ -102,9 +103,21 @@ describe( 'Game', () => {
 
         });
 
-
-
-
     });
+
+    it( 'may consist of more than one match', () => {
+        this.game.setPlayerChoice( 0, ROCK );
+        this.game.setPlayerChoice( 1, ROCK );
+
+        this.game.startNewMatch();
+
+        this.game.setPlayerChoice( 0, ROCK );
+        this.game.setPlayerChoice( 1, PAPER );
+
+        expect( this.events.length ).toEqual( 2 );
+        expect( this.events[0].winner ).toBe( DRAW );
+        expect( this.events[1].winner ).toBe( 1 );
+    });
+
 
 });

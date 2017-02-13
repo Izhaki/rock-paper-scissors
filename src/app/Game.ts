@@ -21,16 +21,25 @@ type Match = [ PlayerChoice, PlayerChoice ];
 
 export
 class Game {
-    private match: Match = [ undefined, undefined ];
+    private matches: Array< Match > = [];
     private event$: Stream = new Stream();
 
+    startNewMatch(): void {
+        this.matches.push( [ undefined, undefined ] );
+    }
+
     setPlayerChoice( aPlayerIndex: number, aChoice: PlayerChoice ): void {
-        this.match[ aPlayerIndex ] = aChoice;
-        this.checkMatchEnd( this.match );
+        this.getCurrentMatch()[ aPlayerIndex ] = aChoice;
+        this.checkMatchEnd( this.getCurrentMatch() );
     }
 
     subscribe( aEventCallback ): Subscription {
         return this.event$.subscribe( aEventCallback );
+    }
+
+    private getCurrentMatch(): Match {
+        const iLastMatchIndex = this.matches.length - 1;
+        return this.matches[ iLastMatchIndex ];
     }
 
     private checkMatchEnd( aMatch: Match ): void {
