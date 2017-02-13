@@ -3,7 +3,8 @@ import {
     ROCK,
     PAPER,
     DRAW,
-    SCISSORS
+    SCISSORS,
+    EVENT_ALL_PLAYERS_JOINED
 } from './Game';
 
 describe( 'Game', () => {
@@ -40,6 +41,22 @@ describe( 'Game', () => {
 
     });
 
+    it( 'should notify once all players have joined', () => {
+            this.game = new Game();
+            this.events = [];
+            this.game.subscribe( aEvent => {
+                this.events.push( aEvent );
+            });
+
+            this.game.addPlayer( 'Johnny' );
+            this.game.addPlayer( 'Depp' );
+
+            expect( this.events.length ).toEqual( 1 );
+            expect( this.events[0].type ).toBe( EVENT_ALL_PLAYERS_JOINED );
+            expect( this.events[0].players[0].name ).toBe( 'Johnny' );
+            expect( this.events[0].players[1].name ).toBe( 'Depp' );
+    });
+
     describe( 'once all players joined', () => {
 
         beforeEach( () => {
@@ -51,6 +68,7 @@ describe( 'Game', () => {
             this.game.subscribe( aEvent => {
                 this.events.push( aEvent );
             });
+
         });
 
         describe( 'A match should conclude with', () => {

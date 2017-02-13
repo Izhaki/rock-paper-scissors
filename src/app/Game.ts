@@ -19,6 +19,8 @@ export const SCISSORS = PlayerChoice.SCISSORS;
 
 export const DRAW = -1; // The returned value for a match in case there it's a draw
 
+export const EVENT_ALL_PLAYERS_JOINED = 'All players joined';
+
 type Match = [ PlayerChoice, PlayerChoice ];
 
 interface Player {
@@ -31,16 +33,27 @@ class Game {
     private players: Array< Player > = [];
     private matches: Array< Match >  = [];
     private event$: Stream = new Stream();
+    private playersCount = 2;
 
     static generateRandomChoice(): PlayerChoice {
         return generateRandomIntInclusive( 0, 2 );
     }
 
     addPlayer( aPlayerName: string ): number {
-        return this.players.push({
+
+        const iPlayerIndex = this.players.push({
             name:       aPlayerName,
             onAutoMode: false
         });
+
+        if ( this.players.length === this.playersCount ) {
+            this.event$.notify({
+                type: EVENT_ALL_PLAYERS_JOINED,
+                players: this.players
+            });
+        }
+
+        return iPlayerIndex;
     }
 
     setPlayerAutoMode( aPlayerIndex: number, onAutoMode: boolean ): void {
