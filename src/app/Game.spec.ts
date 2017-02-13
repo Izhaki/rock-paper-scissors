@@ -4,7 +4,8 @@ import {
     PAPER,
     DRAW,
     SCISSORS,
-    EVENT_ALL_PLAYERS_JOINED
+    EVENT_ALL_PLAYERS_JOINED,
+    EVENT_MATCH_CONCLUDED
 } from './Game';
 
 describe( 'Game', () => {
@@ -71,6 +72,15 @@ describe( 'Game', () => {
 
         });
 
+        it( 'should notify when a game concludes', () => {
+            this.game.setPlayerChoice( 0, ROCK );
+            this.game.setPlayerChoice( 1, ROCK );
+
+            expect( this.events.length ).toEqual( 1 );
+            expect( this.events[0].type ).toBe( EVENT_MATCH_CONCLUDED );
+            expect( this.events[0].winner ).toBe( DRAW );
+        });
+
         describe( 'A match should conclude with', () => {
 
             describe( 'a draw if the choice of both players chose', () => {
@@ -79,7 +89,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, ROCK );
                     this.game.setPlayerChoice( 1, ROCK );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( DRAW );
                 });
 
@@ -87,7 +96,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, PAPER );
                     this.game.setPlayerChoice( 1, PAPER );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( DRAW );
                 });
 
@@ -95,7 +103,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, SCISSORS );
                     this.game.setPlayerChoice( 1, SCISSORS );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( DRAW );
                 });
 
@@ -107,7 +114,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, ROCK );
                     this.game.setPlayerChoice( 1, SCISSORS );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 0 );
                 });
 
@@ -115,7 +121,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, SCISSORS );
                     this.game.setPlayerChoice( 1, PAPER );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 0 );
                 });
 
@@ -123,7 +128,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 0, PAPER );
                     this.game.setPlayerChoice( 1, ROCK );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 0 );
                 });
 
@@ -135,7 +139,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 1, ROCK );
                     this.game.setPlayerChoice( 0, SCISSORS );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 1 );
                 });
 
@@ -143,7 +146,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 1, SCISSORS );
                     this.game.setPlayerChoice( 0, PAPER );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 1 );
                 });
 
@@ -151,7 +153,6 @@ describe( 'Game', () => {
                     this.game.setPlayerChoice( 1, PAPER );
                     this.game.setPlayerChoice( 0, ROCK );
 
-                    expect( this.events.length ).toEqual( 1 );
                     expect( this.events[0].winner ).toBe( 1 );
                 });
 
@@ -179,7 +180,6 @@ describe( 'Game', () => {
             this.game.setPlayerAutoMode( 1, true );
             this.game.setPlayerChoice( 0, ROCK );
 
-            expect( this.events.length ).toEqual( 1 );
             expect( this.events[0].winner ).toBe( DRAW );
         });
 

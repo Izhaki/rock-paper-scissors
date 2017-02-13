@@ -20,6 +20,7 @@ export const SCISSORS = PlayerChoice.SCISSORS;
 export const DRAW = -1; // The returned value for a match in case there it's a draw
 
 export const EVENT_ALL_PLAYERS_JOINED = 'All players joined';
+export const EVENT_MATCH_CONCLUDED    = 'Match concluded';
 
 type Match = [ PlayerChoice, PlayerChoice ];
 
@@ -98,6 +99,7 @@ class Game {
         const [ aPlayer0Choice, aPlayer1Choice ] = aMatch;
         const iWinner = this.getWinner( aPlayer0Choice, aPlayer1Choice );
         this.event$.notify({
+            type:   EVENT_MATCH_CONCLUDED,
             winner: iWinner
         });
     }
