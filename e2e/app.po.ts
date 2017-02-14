@@ -8,4 +8,10 @@ export class RockPaperScissorsPage {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getPlayerNames() {
+    return element
+      .all( by.className( 'player-name' ) )
+      .map( aElement => aElement.getText() );
+  }
 }

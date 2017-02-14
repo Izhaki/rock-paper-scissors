@@ -40,11 +40,13 @@ class Game {
 
     static generateRandomChoice(): PlayerChoice {
         return generateRandomIntInclusive( 0, 2 );
-    }
+    };
 
     addPlayer( aPlayerName: string ): number {
 
-        const iPlayerIndex = this.players.push({
+        const iPlayerIndex = this.players.length;
+
+        this.players.push({
             name:       aPlayerName,
             score:      0,
             onAutoMode: false

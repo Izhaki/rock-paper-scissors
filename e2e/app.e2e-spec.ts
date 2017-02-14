@@ -11,4 +11,10 @@ describe('rock-paper-scissors App', function() {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Rock, Paper, Scissors.');
   });
+
+  it('should display the player names', () => {
+    page.navigateTo();
+    expect(page.getPlayerNames()).toEqual( [ 'Computer', 'You' ] );
+  });
+
 });
