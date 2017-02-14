@@ -14,4 +14,11 @@ export class RockPaperScissorsPage {
       .all( by.className( 'player-name' ) )
       .map( aElement => aElement.getText() );
   }
+
+  getPlayerScores() {
+    return element
+      .all( by.className( 'player-score' ) )
+      .map( aElement => aElement.getText() );
+  }
+
 }

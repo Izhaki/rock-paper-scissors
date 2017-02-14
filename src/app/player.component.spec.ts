@@ -24,4 +24,14 @@ describe( 'PlayerComponent', () => {
 
     expect( this.compiled.querySelector( '.player-name' ).textContent ).toContain( 'Johnny' );
   }));
+
+  it('should render the player score', async(() => {
+    this.component.player = {
+      score: 10,
+    };
+    this.fixture.detectChanges();
+
+    expect( this.compiled.querySelector( '.player-score' ).textContent ).toContain( '10' );
+  }));
+
 });

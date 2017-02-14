@@ -17,4 +17,10 @@ describe('rock-paper-scissors App', function() {
     expect(page.getPlayerNames()).toEqual( [ 'Computer', 'You' ] );
   });
 
+  it('should display the player scores', () => {
+    page.navigateTo();
+    expect(page.getPlayerScores()).toEqual( [ '0', '0' ] );
+  });
+
+
 });
