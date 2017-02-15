@@ -17,7 +17,9 @@ export class AppComponent {
   game          = undefined;
   players       = undefined;
   matchOn       = false;
-  winnerMessage = undefined;
+  winnerIndex   = undefined;
+
+  draw          = DRAW;
 
   constructor() {
     this.game = new Game();
@@ -40,7 +42,7 @@ export class AppComponent {
         this.matchOn = true;
         break;
       case EVENT_MATCH_CONCLUDED:
-        this.winnerMessage = aEvent.winner === DRAW ? `It's a draw` : `The winner is: ` + this.players[ aEvent.winner ].name;
+        this.winnerIndex = aEvent.winner;
         this.matchOn = false;
         break;
     }
@@ -52,5 +54,9 @@ export class AppComponent {
 
   startNewMatch() {
     this.game.startNewMatch();
+  }
+
+  isTheWinner( aPlayerIndex ) {
+    return aPlayerIndex === this.winnerIndex;
   }
 }

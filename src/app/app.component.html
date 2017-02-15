@@ -3,12 +3,19 @@
   {{title}}
 </h1>
 
-<div>
-  <player *ngFor="let player of players" [player]="player" [matchOn]="matchOn" (onChoiceMade)="onPlayerChoice( player.id, $event )"></player>
-</div>
+<div class="players">
+  <div [hidden]="matchOn" class="winner-indicator">
+    <div class="winner-icon-bar">
+      <mdl-icon class="winner-gets-a-cake">cake</mdl-icon>
+    </div>
+    <div class="winner-icon-bar">
+      <mdl-icon [ngClass]="{ 'is-the-winner': isTheWinner(0) }" class="winner-left mirror-horizontally">play_arrow</mdl-icon>
+      <mdl-icon [ngClass]="{ 'is-the-winner': isTheWinner(draw) }" class="winner-none">stop</mdl-icon>
+      <mdl-icon [ngClass]="{ 'is-the-winner': isTheWinner(1) }" class="winner-right">play_arrow</mdl-icon>
+    </div>
+  </div>
 
-<div class="bay">
-  <div *ngIf="!matchOn">{{ winnerMessage }}</div>
+  <player *ngFor="let player of players" [player]="player" [matchOn]="matchOn" (onChoiceMade)="onPlayerChoice( player.id, $event )"></player>
 </div>
 
 <div class="bay">

@@ -4,6 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player.component';
 import { ZeroPadderPipe } from './zeroPadder.pipe';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -13,6 +14,7 @@ describe('AppComponent', () => {
         PlayerComponent,
         ZeroPadderPipe
       ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     });
     TestBed.compileComponents();
   });

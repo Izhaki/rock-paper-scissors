@@ -1,5 +1,6 @@
 h1 {
   font-weight: 300;
+  text-align: center;
 }
 
 .bay {
@@ -11,3 +12,71 @@ h1 {
 .button-new-match {
   margin-top: 10px;
 }
+
+.players {
+  position: relative;
+}
+
+player {
+  display: inline-block;
+  margin: 40px;
+}
+
+.winner-indicator {
+  position: absolute;
+
+  width: 120px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  top: 50%;
+  height: 26px;
+  margin-top: -46px;
+}
+
+.winner-icon-bar {
+  text-align: center;
+}
+
+.is-the-winner {
+
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: #555;
+  }
+  50% {
+    color: #ffc530;
+  }
+  100% {
+    color: #555;
+  }
+}
+
+.winner-left, .winner-none, .winner-right {
+  position: relative;
+  font-size: 32px;
+}
+
+.winner-gets-a-cake {
+  position: relative;
+  top: 10px;
+  font-size: 20px;
+}
+
+.winner-left {
+  left: 16px;
+}
+
+.winner-right {
+  left: -16px;
+}
+
+.mirror-horizontally {
+  transform: rotate( 0.5turn )
+}
+
