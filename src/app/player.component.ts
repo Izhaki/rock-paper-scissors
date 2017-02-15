@@ -1,13 +1,31 @@
 import {
   Component,
-  Input
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
+
+import {
+  ROCK,
+  PAPER,
+  SCISSORS
+} from './Game';
+
 
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
 })
 export class PlayerComponent {
-  @Input()
-  player;
+  @Input() player;
+  @Output() onChoiceMade = new EventEmitter();
+
+  rock     = ROCK;
+  paper    = PAPER;
+  scissors = SCISSORS;
+
+  choose( aChoice ) {
+    this.onChoiceMade.emit( aChoice );
+  }
+
 }

@@ -15,10 +15,16 @@ export class RockPaperScissorsPage {
       .map( aElement => aElement.getText() );
   }
 
+  getPlayerScoreElements() {
+    return element.all( by.className( 'player-score' ) );
+  }
+
   getPlayerScores() {
-    return element
-      .all( by.className( 'player-score' ) )
-      .map( aElement => aElement.getText() );
+    return this.getPlayerScoreElements().map( aElement => aElement.getText() );
+  }
+
+  getRockButton() {
+    return element.all( by.className( 'button-rock' ) ).last();
   }
 
 }

@@ -1,4 +1,7 @@
 <div>
   <span class="player-name">{{ player.name }}</span>
   <span class="player-score">{{ player.score }}</span>
+  <button class="button-rock" [disabled]="player.onAutoMode" (click)="choose(rock)">✊ Rock</button>
+  <button class="button-paper" [disabled]="player.onAutoMode" (click)="choose(paper)">✋ Paper</button>
+  <button class="button-scissors" [disabled]="player.onAutoMode" (click)="choose(scissors)">✌️ Scissors</button>
 </div>

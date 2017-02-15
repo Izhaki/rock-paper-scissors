@@ -22,5 +22,12 @@ describe('rock-paper-scissors App', function() {
     expect(page.getPlayerScores()).toEqual( [ '0', '0' ] );
   });
 
+  it('when the user makes a choice the score should update ', () => {
+    page.navigateTo();
+    page.getRockButton().click();
+    const totalScore = page.getPlayerScoreElements().reduce( ( acc, element ) => element.getText().then( text => acc + +text ), 0);
+    expect( totalScore ).toEqual( 1 );
+  });
+
 
 });

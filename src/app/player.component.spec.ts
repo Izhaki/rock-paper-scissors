@@ -1,5 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
+import { By } from '@angular/platform-browser';
+
 import { TestBed, async } from '@angular/core/testing';
 import { PlayerComponent } from './player.component';
 
@@ -16,22 +18,30 @@ describe( 'PlayerComponent', () => {
     this.compiled  = this.fixture.debugElement.nativeElement;
   });
 
-  it('should render the player name', async(() => {
+  beforeEach( () => {
     this.component.player = {
+      id:   0,
       name: 'Johnny',
+      score: 10,
     };
-    this.fixture.detectChanges();
 
+    this.fixture.detectChanges();
+  });
+
+  it('should render the player name', async(() => {
     expect( this.compiled.querySelector( '.player-name' ).textContent ).toContain( 'Johnny' );
   }));
 
   it('should render the player score', async(() => {
-    this.component.player = {
-      score: 10,
-    };
-    this.fixture.detectChanges();
-
     expect( this.compiled.querySelector( '.player-score' ).textContent ).toContain( '10' );
   }));
+
+  it('should render the 3 buttons', async(() => {
+    this.debugElement = this.fixture.debugElement;
+    const buttonElements = this.debugElement.queryAll(By.css('button'));
+
+    expect( buttonElements.length ).toBe( 3 );
+  }));
+
 
 });

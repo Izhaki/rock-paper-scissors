@@ -26,6 +26,7 @@ export const EVENT_MATCH_STARTED      = 'Match started';
 type Match = [ PlayerChoice, PlayerChoice ];
 
 interface Player {
+    id:         number;
     name:       string;
     score:      number;
     onAutoMode: Boolean;
@@ -44,9 +45,10 @@ class Game {
 
     addPlayer( aPlayerName: string ): number {
 
-        const iPlayerIndex = this.players.length;
+        const iPlayerID = this.players.length;
 
         this.players.push({
+            id:         iPlayerID,
             name:       aPlayerName,
             score:      0,
             onAutoMode: false
@@ -59,7 +61,7 @@ class Game {
             });
         }
 
-        return iPlayerIndex;
+        return iPlayerID;
     }
 
     setPlayerAutoMode( aPlayerIndex: number, onAutoMode: boolean ): void {

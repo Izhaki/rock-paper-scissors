@@ -1,4 +1,4 @@
 <h1>
   {{title}}
 </h1>
-<player *ngFor="let player of players" [player]="player"></player>
+<player *ngFor="let player of players" [player]="player" (onChoiceMade)="onPlayerChoice( player.id, $event )"></player>
