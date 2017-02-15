@@ -1,0 +1,13 @@
+h1 {
+  font-weight: 300;
+}
+
+.bay {
+  margin-top: 10px;
+  height: 40px;
+  text-align: center;
+}
+
+.button-new-match {
+  margin-top: 10px;
+}

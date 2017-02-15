@@ -1,0 +1,23 @@
+.player-container {
+  display: inline-block;
+  width: 250px;
+}
+
+.player-name, .player-score, .button-bar {
+  text-align: center;
+}
+
+.player-name {
+  font-size: 36px;
+  line-height: 60px;
+}
+
+.player-score {
+  font-family: 'Freckle Face', cursive;
+  font-size: 36px;
+  line-height: 60px;
+}
+
+.button-bar {
+  padding: 6px;
+}

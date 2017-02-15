@@ -9,7 +9,7 @@ describe('rock-paper-scissors App', function() {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Rock, Paper, Scissors.');
+    expect(page.getParagraphText()).toEqual('Rock  |  Paper  |  Scissors');
   });
 
   it('should display the player names', () => {

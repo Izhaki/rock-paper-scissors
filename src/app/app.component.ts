@@ -13,7 +13,7 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title         = 'Rock, Paper, Scissors.';
+  title         = 'Rock  |  Paper  |  Scissors';
   game          = undefined;
   players       = undefined;
   matchOn       = false;
