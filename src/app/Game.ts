@@ -29,6 +29,7 @@ interface Player {
     id:         number;
     name:       string;
     score:      number;
+    lastChoice: number;
     onAutoMode: Boolean;
 }
 
@@ -51,6 +52,7 @@ class Game {
             id:         iPlayerID,
             name:       aPlayerName,
             score:      0,
+            lastChoice: undefined,
             onAutoMode: false
         });
 
@@ -110,6 +112,10 @@ class Game {
         const iWinner = this.getWinner( aPlayer0Choice, aPlayer1Choice );
 
         this.updateScores( iWinner );
+
+        this.players.forEach( ( aPlayer, aIndex ) => {
+            aPlayer.lastChoice = aMatch[ aIndex ];
+        });
 
         this.event$.notify({
             type:    EVENT_MATCH_CONCLUDED,

@@ -2,8 +2,26 @@
   <div class="player-name">{{ player.name }}</div>
   <div class="player-score">{{ player.score | zeroPadder: 3 }}</div>
   <div class="button-bar">
-    <button class="button-rock" [disabled]="player.onAutoMode || !matchOn" (click)="choose(rock)" mdl-button mdl-button-type="fab">✊</button>
-    <button class="button-paper" [disabled]="player.onAutoMode || !matchOn" (click)="choose(paper)" mdl-button mdl-button-type="fab">✋</button>
-    <button class="button-scissors" [disabled]="player.onAutoMode || !matchOn" (click)="choose(scissors)" mdl-button mdl-button-type="fab">✌️</button>
+    <button
+      class="button-rock"
+      [disabled]="isDisabled(rock)"
+      (click)="choose(rock)"
+      mdl-button
+      mdl-ripple
+      mdl-button-type="fab">✊</button>
+    <button
+      class="button-paper"
+      [disabled]="isDisabled(paper)"
+      (click)="choose(paper)"
+      mdl-ripple
+      mdl-button
+      mdl-button-type="fab">✋</button>
+    <button
+      class="button-scissors"
+      [disabled]="isDisabled(scissors)"
+      (click)="choose(scissors)"
+      mdl-button
+      mdl-ripple
+      mdl-button-type="fab">✌️</button>
   </div>
 </div>

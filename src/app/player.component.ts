@@ -27,7 +27,19 @@ export class PlayerComponent {
   scissors = SCISSORS;
 
   choose( aChoice ) {
-    this.onChoiceMade.emit( aChoice );
+    if ( this.matchOn ) {
+      this.onChoiceMade.emit( aChoice );
+    }
+  }
+
+  isDisabled( aChoice ) {
+    const { player, matchOn } = this;
+    if ( matchOn ) {
+      return player.onAutoMode;
+    } else {
+      return player.lastChoice !== aChoice;
+    }
+
   }
 
 }

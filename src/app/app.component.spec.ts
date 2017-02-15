@@ -3,13 +3,15 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player.component';
+import { ZeroPadderPipe } from './zeroPadder.pipe';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        PlayerComponent
+        PlayerComponent,
+        ZeroPadderPipe
       ],
     });
     TestBed.compileComponents();

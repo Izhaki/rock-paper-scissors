@@ -109,6 +109,12 @@ describe( 'Game', () => {
                 expect( this.events[0].players[1].score).toBe( 0 );
             });
 
+            it( 'reporting the last choice of each player', () => {
+                expect( this.events[0].players[0].lastChoice ).toBe( PAPER );
+                expect( this.events[0].players[1].lastChoice ).toBe( ROCK );
+            });
+
+
         });
 
         describe( 'A match should conclude with', () => {

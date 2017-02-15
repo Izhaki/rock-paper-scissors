@@ -4,12 +4,14 @@ import { By } from '@angular/platform-browser';
 
 import { TestBed, async } from '@angular/core/testing';
 import { PlayerComponent } from './player.component';
+import { ZeroPadderPipe } from './zeroPadder.pipe';
 
 describe( 'PlayerComponent', () => {
   beforeEach( () => {
     TestBed.configureTestingModule({
       declarations: [
-        PlayerComponent
+        PlayerComponent,
+        ZeroPadderPipe
       ],
     });
     TestBed.compileComponents();
