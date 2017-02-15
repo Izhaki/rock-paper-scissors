@@ -3,7 +3,8 @@ import {
   Game,
   EVENT_ALL_PLAYERS_JOINED,
   EVENT_MATCH_STARTED,
-  EVENT_MATCH_CONCLUDED
+  EVENT_MATCH_CONCLUDED,
+  DRAW
 } from './Game';
 
 @Component({
@@ -12,10 +13,11 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title   = 'Rock, Paper, Scissors.';
-  game    = undefined;
-  players = undefined;
-  matchOn = false;
+  title         = 'Rock, Paper, Scissors.';
+  game          = undefined;
+  players       = undefined;
+  matchOn       = false;
+  winnerMessage = undefined;
 
   constructor() {
     this.game = new Game();
@@ -38,6 +40,7 @@ export class AppComponent {
         this.matchOn = true;
         break;
       case EVENT_MATCH_CONCLUDED:
+        this.winnerMessage = aEvent.winner === DRAW ? `It's a draw` : `The winner is:` + this.players[ aEvent.winner ].name;
         this.matchOn = false;
         break;
     }
