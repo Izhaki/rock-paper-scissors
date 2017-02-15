@@ -2,4 +2,5 @@
   {{title}}
 </h1>
 <div *ngIf="!matchOn">{{ winnerMessage }}</div>
-<player *ngFor="let player of players" [player]="player" (onChoiceMade)="onPlayerChoice( player.id, $event )"></player>
+<player *ngFor="let player of players" [player]="player" [matchOn]="matchOn" (onChoiceMade)="onPlayerChoice( player.id, $event )"></player>
+<button *ngIf="!matchOn" class="button-new-match" (click)="startNewMatch()">Play another match</button>

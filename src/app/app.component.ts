@@ -40,7 +40,7 @@ export class AppComponent {
         this.matchOn = true;
         break;
       case EVENT_MATCH_CONCLUDED:
-        this.winnerMessage = aEvent.winner === DRAW ? `It's a draw` : `The winner is:` + this.players[ aEvent.winner ].name;
+        this.winnerMessage = aEvent.winner === DRAW ? `It's a draw` : `The winner is: ` + this.players[ aEvent.winner ].name;
         this.matchOn = false;
         break;
     }
@@ -48,5 +48,9 @@ export class AppComponent {
 
   onPlayerChoice( aPlayerId, aChoice ) {
     this.game.setPlayerChoice( aPlayerId, aChoice );
+  }
+
+  startNewMatch() {
+    this.game.startNewMatch();
   }
 }

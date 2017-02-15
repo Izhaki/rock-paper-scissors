@@ -18,6 +18,7 @@ import {
 })
 export class PlayerComponent {
   @Input() player;
+  @Input() matchOn;
   @Output() onChoiceMade = new EventEmitter();
 
   rock     = ROCK;
