@@ -1,5 +1,7 @@
 # Rock Paper Scissors
 
+[![Build Status](https://travis-ci.org/Izhaki/rock-paper-scissors.svg?branch=master)](https://travis-ci.org/Izhaki/rock-paper-scissors)
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Requirements
@@ -16,11 +18,9 @@ If haven't got it, probably best to use:
 
 npm version needs to be >= 3
 
-### Angular cli
+### Modern browser
 
-Although it shouldn't be needed, you may need to install angular-cli globally:
-
-    npm install -g angular-cli
+Tests run on Chrome. App was only tested on latest versions of Chrome, Firefox, and Safari.
 
 ## Development server
 
@@ -37,5 +37,5 @@ Before running the tests make sure you are serving the app via `npm start`.
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:production` flag for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:production` for a production build.
 
