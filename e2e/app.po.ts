@@ -23,8 +23,4 @@ export class RockPaperScissorsPage {
     return this.getPlayerScoreElements().map( aElement => aElement.getText() );
   }
 
-  getRockButton() {
-    return element.all( by.className( 'button-rock' ) ).last();
-  }
-
 }

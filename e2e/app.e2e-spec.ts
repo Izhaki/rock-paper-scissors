@@ -9,7 +9,7 @@ describe('rock-paper-scissors App', function() {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Rock  |  Paper  |  Scissors');
+    expect(page.getParagraphText()).toEqual('Rock | Paper | Scissors');
   });
 
   it('should display the player names', () => {
@@ -19,15 +19,7 @@ describe('rock-paper-scissors App', function() {
 
   it('should display the player scores', () => {
     page.navigateTo();
-    expect(page.getPlayerScores()).toEqual( [ '0', '0' ] );
+    expect(page.getPlayerScores()).toEqual( [ '000', '000' ] );
   });
-
-  it('when the user makes a choice the score should update ', () => {
-    page.navigateTo();
-    page.getRockButton().click();
-    const totalScore = page.getPlayerScoreElements().reduce( ( acc, element ) => element.getText().then( text => acc + +text ), 0);
-    expect( totalScore ).toEqual( 1 );
-  });
-
 
 });
