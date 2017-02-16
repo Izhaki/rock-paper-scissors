@@ -1,16 +1,17 @@
 h1 {
   font-weight: 300;
   text-align: center;
+  margin: 10px;
 }
 
 .bay {
-  margin-top: 10px;
+  margin-top: 20px;
   height: 40px;
   text-align: center;
 }
 
 .button-new-match {
-  margin-top: 10px;
+  width: 76%;
 }
 
 .players {
